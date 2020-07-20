@@ -50,6 +50,7 @@ public class Mainpage extends JFrame {
 	private String uniID;
 	 private String guest_email;
 	 private String uniid;
+	 private int cd=0;
 	
 	 studentService ss = new studentserviceImpl();
 	 BigInteger bg=null;
@@ -132,54 +133,56 @@ public class Mainpage extends JFrame {
 		infolink.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				uniid = JOptionPane.showInputDialog("Please Enter your UniversityID to proceed>>");	
+				 cd = Integer.parseInt(uniid);
+				 System.out.println(cd);
 				try {
-					uniid = JOptionPane.showInputDialog("Please Enter your UniversityID to proceed>>");	
-					int cd = Integer.parseInt(uniid);
-					System.out.println(cd);
+					
+				
 					try {
-					if(ss.checkstatuscolumn_of_studentadminrecord(cd)) {
-						
-						try {
-							
-							
-							if(isnumeric(uniid)) {
-								
-								BigInteger bgi = new BigInteger(uniid);
-								long lvalue=bgi.longValue();
-								
-								if(lvalue==ss.getuniIDdb(bgi)){
-									stdRegistration rg = new stdRegistration();
-									rg.setVisible(true);
-									
-									disposeMainpage();
-									
-								}
-								
-							}
-							
-							
-							
-							
-							
+						if(!ss.checkstatuscolumn_of_studentadminrecord(cd)) {
+							 cd = Integer.parseInt(uniid);
+							return;
 						}
-						catch(Exception eq) {
-							JOptionPane.showMessageDialog(null, "Registration failed. Try AGAIN!");
-							
-						}			
-										
-										
-						
-						
-					}
 					else {
 						System.out.println("username exits");
 						JOptionPane.showMessageDialog(null, "username exits");
 					}
-					}
-					catch(Exception x) {
-						System.out.println("Status not checked due to failed internet connection");
-					}
+					
+				
 				 
+				}
+				catch(Exception eq1) {
+			
+					try {
+						
+						
+						if(isnumeric(uniid)) {
+							long lvalue=new BigInteger(uniid).longValue();
+							
+							if(lvalue==ss.getuniIDdb(new BigInteger(uniid))){
+								stdRegistration rg = new stdRegistration();
+								rg.setVisible(true);
+								
+								disposeMainpage();
+								
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "ID doesnot match");
+							}
+							
+						
+						}
+						
+					}
+					catch(Exception eq) {
+						JOptionPane.showMessageDialog(null, "Registration failed. Try AGAIN!");
+						
+					}			
+									
+					
+					
+				}
 				}
 				catch(Exception eq) {
 					
@@ -188,16 +191,17 @@ public class Mainpage extends JFrame {
 				
 			}
 		});
-		infolink.setBounds(203, 324, 383, 38);
+		infolink.setBounds(262, 323, 268, 38);
 		mainpanel.add(infolink);
 		
 		JButton ForgetPasswordbtn = new JButton("Forget Password");
 		ForgetPasswordbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-				uniID = JOptionPane.showInputDialog("Please Enter your University ID to proceed");
+				uniID = JOptionPane.showInputDialog("Please Enter your College ID to proceed");
 //				System.out.println(uniID);
-				int id = 1816212;//received from database..
+				ss.get
+				int id=1816212;
 				try {
 				if(!uniID.isEmpty()) {
 					int uni_id = Integer.parseInt(uniID);
@@ -258,15 +262,10 @@ public class Mainpage extends JFrame {
 					else {
 						JOptionPane.showMessageDialog(null, "Worng Username and Password");
 					}
-						
-						
-					
+
 						studentid.setText("");
 						password.setText("");
-					
-				
-					
-					
+	
 				}
 					
 					else {
@@ -404,6 +403,11 @@ public class Mainpage extends JFrame {
 		return bg;
 
 	
+	}
+	public int sendtheuniid() {
+		this.cd=cd;
+		System.out.println(cd);
+		return cd;
 	}
 	
 

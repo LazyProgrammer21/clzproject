@@ -71,6 +71,7 @@ public class stdRegistration extends JFrame {
 	sectionService s = new sectionServiceImpl();
 	studentService stdservice = new studentserviceImpl();
 	static semesterService sems = new semesterSeriveImpl();
+	Mainpage mp = new Mainpage();
 	
 	
 	
@@ -358,7 +359,7 @@ public class stdRegistration extends JFrame {
 				 
 				
 				
-				if(stdservice.newRegister(s_info, subid, semid, secid))
+				if(stdservice.newRegister(s_info, subid, semid, secid)&&stdservice.updateAdmintable(mp.sendtheuniid()))
 				{
 					
 					JOptionPane.showMessageDialog(null, "Added Success");
@@ -445,15 +446,6 @@ public class stdRegistration extends JFrame {
 		lblSubject_1.setFont(new Font("FreeSans", Font.BOLD, 16));
 		lblSubject_1.setBounds(188, 379, 94, 25);
 		panel.add(lblSubject_1);
-		
-		JButton btnS = new JButton("s");
-		btnS.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, subject.getSelectedItem().toString());
-			}
-		});
-		btnS.setBounds(628, 354, 117, 25);
-		panel.add(btnS);
 		
 	
 		

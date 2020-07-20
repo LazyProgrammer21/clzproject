@@ -103,18 +103,22 @@ public class studentserviceImpl implements studentService{
 				
 			Statement s;
 			try {
+				
 				s = con.createStatement();
 				ResultSet rs = s.executeQuery(sql);
 				while(rs.next()) {
 			
 				if(rs.getLong(1)==longvalue_of_uid) {
 					acvalue=rs.getLong(1);
+					break;
 				}
-				 					
+							
 				}
+			
 			} catch (SQLException e) {
 			
-				e.printStackTrace();
+//				e.printStackTrace();
+				System.out.println("data not checked");
 			}
 			
 			
@@ -138,7 +142,7 @@ public class studentserviceImpl implements studentService{
 		
 	}
 	catch(SQLException e ) {
-		e.printStackTrace();
+
 		z=false;
 	}
 		
@@ -153,10 +157,9 @@ public class studentserviceImpl implements studentService{
 		boolean stv=false;
 
 		
-		
+		String sql ="select STATUS from adminstudentrecord where uniID="+x;
 		
 		try {
-			String sql ="select STATUS from adminstudentrecord where uniID="+x;
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rrset = ps.executeQuery();
@@ -165,15 +168,16 @@ public class studentserviceImpl implements studentService{
 	
 			String xu = rrset.getString("status");
 			if(xu.equals("Taken")) {
-				stv=false;
+				System.out.println("OK");
 			}
-		
-
+	
+			stv=true;
 			
 		}
 		catch(SQLException e) {
-//		System.out.println("Data Fetch Failed");
-			e.printStackTrace();
+
+		stv=false;
+
 		}
 
 		return stv;
@@ -335,6 +339,61 @@ public class studentserviceImpl implements studentService{
 		
 		
 		return x;
+	}
+	@Override
+	public boolean forgetpasswordupdate(int id, String newpassword) {
+	
+		boolean x=false;
+		String sql = "update studentinfo set PASSWORD = \'"+newpassword+"'"+"where uniID="+id;
+		try {
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.execute();
+			
+			x=true;
+		
+			
+		}
+		catch(SQLException e ) {
+
+			x=false;
+		}
+			
+		
+		
+		
+		
+		return x;
+	}
+	@Override
+	public boolean getallstudentclzid() {
+boolean stv=false;
+
+		
+		String sql ="select  from adminstudentrecord where uniID="+x;
+		
+		try {
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rrset = ps.executeQuery();
+			
+			rrset.next();
+	
+			String xu = rrset.getString("status");
+			if(xu.equals("Taken")) {
+				System.out.println("OK");
+			}
+	
+			stv=true;
+			
+		}
+		catch(SQLException e) {
+
+		stv=false;
+
+		}
+
+		return stv;
+		return false;
 	}
 
 

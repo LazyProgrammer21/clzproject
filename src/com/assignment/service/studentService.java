@@ -19,6 +19,8 @@ public interface studentService {
 	List<studentinfo> getdatafromstudentadminrecord();
 	studentinfo getStudentdata(int id);
 	boolean deletestudentrecord(int id);
+	boolean forgetpasswordupdate(int id, String newpassword);
+	boolean getallstudentclzid();
 
 
 }

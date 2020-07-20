@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/hunte/Downloads/ojdbc10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hunte/OneDrive/Desktop/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hunte/Downloads/rs2xml/rs2xml/rs2xml.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
