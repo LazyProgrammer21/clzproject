@@ -84,7 +84,7 @@ public class administrativepage extends JFrame {
 				
 			}
 		});
-		btnChangeAdminkey.setBounds(112, 91, 183, 41);
+		btnChangeAdminkey.setBounds(112, 127, 183, 41);
 		contentPane.add(btnChangeAdminkey);
 		
 		JButton btnViewStudentUnikey = new JButton("View Student Unikey");
@@ -96,15 +96,7 @@ public class administrativepage extends JFrame {
 				administrativepage.this.dispose();
 			}
 		});
-		btnViewStudentUnikey.setBounds(112, 144, 183, 41);
+		btnViewStudentUnikey.setBounds(112, 190, 183, 41);
 		contentPane.add(btnViewStudentUnikey);
-		
-		JButton btnAddTeacher = new JButton("View Teacher detail");
-		btnAddTeacher.setBounds(112, 250, 183, 41);
-		contentPane.add(btnAddTeacher);
-		
-		JButton btnAddSubject = new JButton("Add Subject");
-		btnAddSubject.setBounds(112, 197, 183, 41);
-		contentPane.add(btnAddSubject);
 	}
 }

@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import com.assignment.db.database;
 import com.assignment.model.EventInfo;
@@ -39,7 +41,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JScrollPane;
 
-public class viewEvent extends JFrame {
+public class homepageEvent extends JInternalFrame {
 
 	public JPanel contentPane;
 	private JTable table;
@@ -62,7 +64,7 @@ public class viewEvent extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					viewEvent frame = new viewEvent();
+					homepageEvent frame = new homepageEvent();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -74,14 +76,17 @@ public class viewEvent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public viewEvent() {
+	public homepageEvent() {
 		con = db.getDBConnection();
 		//ef.fillableEventTable(table,"");
 		//ef.viewEvent( table);
 		
-		
+		setBorder(null);
+		BasicInternalFrameUI gui = (BasicInternalFrameUI) this.getUI();
+		gui.setNorthPane(null);
+		setSize(1344, 668);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1380, 701);
+		setBounds(0, 0, 1380, 701);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -90,7 +95,7 @@ public class viewEvent extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(505, 0, 544, 641);
+		panel_1.setBounds(739, 0, 580, 641);
 		contentPane.add(panel_1);
 		
 		JLabel lblNewLabel = new JLabel("Event Details");
@@ -139,28 +144,26 @@ public class viewEvent extends JFrame {
 		txt_EventName.setBounds(170, 125, 364, 37);
 		panel_1.add(txt_EventName);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(170, 175, 364, 160);
+		panel_1.add(scrollPane_1);
+		
 		JTextArea txt_Description = new JTextArea();
+		scrollPane_1.setViewportView(txt_Description);
 		txt_Description.setRows(200);
 		txt_Description.setLineWrap(true);
 		txt_Description.setFont(new Font("Dialog", Font.PLAIN, 23));
-		txt_Description.setBounds(170, 175, 341, 160);
-		panel_1.add(txt_Description);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(170, 344, 364, 68);
+		panel_1.add(scrollPane_2);
 		
 		JTextArea txt_EventVenue = new JTextArea();
+		scrollPane_2.setViewportView(txt_EventVenue);
 		txt_EventVenue.setTabSize(4);
 		txt_EventVenue.setRows(20);
 		txt_EventVenue.setLineWrap(true);
 		txt_EventVenue.setFont(new Font("Dialog", Font.PLAIN, 23));
-		txt_EventVenue.setBounds(170, 344, 341, 68);
-		panel_1.add(txt_EventVenue);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(517, 175, 17, 160);
-		panel_1.add(scrollBar);
-		
-		JScrollBar scrollBar_1 = new JScrollBar();
-		scrollBar_1.setBounds(517, 344, 17, 68);
-		panel_1.add(scrollBar_1);
 		
 		JTextArea txt_StartDate = new JTextArea();
 		txt_StartDate.setFont(new Font("Dialog", Font.PLAIN, 23));
@@ -182,11 +185,11 @@ public class viewEvent extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(Color.LIGHT_GRAY);
-		panel_2.setBounds(0, 0, 495, 641);
+		panel_2.setBounds(0, 0, 705, 641);
 		contentPane.add(panel_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(74, 266, 344, 231);
+		scrollPane.setBounds(74, 266, 573, 253);
 		panel_2.add(scrollPane);
 		
 		table = new JTable();
@@ -233,7 +236,7 @@ public class viewEvent extends JFrame {
 			}
 		});
 		txt_search.setColumns(10);
-		txt_search.setBounds(327, 154, 157, 25);
+		txt_search.setBounds(408, 196, 189, 25);
 		panel_2.add(txt_search);
 		
 		JButton btnView = new JButton("View All");
@@ -248,7 +251,7 @@ public class viewEvent extends JFrame {
 		panel_2.add(btnView);
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter Value To Search");
-		lblNewLabel_1.setBounds(182, 150, 142, 33);
+		lblNewLabel_1.setBounds(267, 192, 142, 33);
 		panel_2.add(lblNewLabel_1);
 		
 		comboBox_1 = new JComboBox();
@@ -262,33 +265,19 @@ public class viewEvent extends JFrame {
 		});
 	
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"IT club", "Sports Club", "Socio-Cultural Club", "Free-Flow Club", "Administrative"}));
-		comboBox_1.setBounds(74, 155, 77, 22);
+		comboBox_1.setBounds(102, 197, 147, 22);
 		panel_2.add(comboBox_1);
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(1059, 0, 283, 641);
-		contentPane.add(panel);
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(102, 545, 91, 25);
+		panel_2.add(btnDelete);
 		
-		JLabel lblImages = new JLabel("Images");
-		lblImages.setFont(new Font("Dialog", Font.BOLD, 33));
-		lblImages.setBounds(5, 5, 116, 37);
-		panel.add(lblImages);
+		JButton btnAddEvent = new JButton("Add event");
+		btnAddEvent.setBounds(205, 544, 109, 25);
+		panel_2.add(btnAddEvent);
 		
-		JLabel lblPicture = new JLabel("picture 1");
-		lblPicture.setForeground(Color.ORANGE);
-		lblPicture.setBackground(Color.RED);
-		lblPicture.setBounds(0, 42, 248, 133);
-		panel.add(lblPicture);
-		
-		JLabel lblPicture_1 = new JLabel("picture 2");
-		lblPicture_1.setBounds(5, 229, 243, 156);
-		panel.add(lblPicture_1);
-		
-		JLabel label = new JLabel("picture 2");
-		label.setBounds(5, 415, 243, 190);
-		panel.add(label);
+		JButton btnBook = new JButton("Book");
+		btnBook.setBounds(432, 544, 109, 25);
+		panel_2.add(btnBook);
 	}
-
 }

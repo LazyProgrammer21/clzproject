@@ -110,7 +110,7 @@ public class AdminHomepage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				trigger_for_btn_disable = 1;
 				desktopPane.removeAll();
-				FeedbackDashboard fd = new FeedbackDashboard(trigger_for_btn_disable);
+				Feedbackpage fd = new Feedbackpage();//pass triiger for btn disable
 				fd.setVisible(true);
 				desktopPane.add(fd);
 				
@@ -118,19 +118,6 @@ public class AdminHomepage extends JFrame {
 		});
 		btnFeedbacks.setFont(new Font("C059", Font.BOLD, 16));
 		menuBar.add(btnFeedbacks);
-		
-		JButton btnRoutine = new JButton("Routine");
-		btnRoutine.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				desktopPane.removeAll();
-				RoutineDashboardAdmin rda = new RoutineDashboardAdmin();
-				rda.setVisible(true);
-				desktopPane.add(rda);
-				
-			}
-		});
-		btnRoutine.setFont(new Font("C059", Font.BOLD, 16));
-		menuBar.add(btnRoutine);
 		
 		JButton btnCollegeDetails = new JButton("College Details");
 		btnCollegeDetails.setFont(new Font("C059", Font.BOLD, 16));
@@ -196,17 +183,12 @@ public class AdminHomepage extends JFrame {
 		btnEvents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				HomepageAllEvent event;
-				try {
-					trigger_for_btn_disable = 1;
-					desktopPane.removeAll();
-					event = new HomepageAllEvent(trigger_for_btn_disable);
+				homepageEvent event;
+				trigger_for_btn_disable = 1;
+				desktopPane.removeAll();
+				event = new homepageEvent();
 //					event.btnCancelEvent.disabled();
-					desktopPane.add(event).setVisible(true);
-				} catch (PropertyVetoException e) {
-					
-					System.out.println("Page Not Found!!");
-				}
+				desktopPane.add(event).setVisible(true);
 				
 				
 			}

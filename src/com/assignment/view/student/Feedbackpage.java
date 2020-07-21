@@ -4,9 +4,11 @@ package com.assignment.view.student;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import com.assignment.model.FeedbackInfo;
 import com.assignment.service.FeedbackServiceImpl;
@@ -29,7 +31,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 
-public class Feedbackpage extends JFrame {
+public class Feedbackpage extends JInternalFrame {
 
 	/**
 	 * 
@@ -63,8 +65,12 @@ public class Feedbackpage extends JFrame {
 	 * Create the frame.
 	 */
 	public Feedbackpage() {
+		setBorder(null);
+		BasicInternalFrameUI gui = (BasicInternalFrameUI) this.getUI();
+		gui.setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1370, 596);
+		setSize(1344, 668);	
+		setBounds(0, 0, 1370, 596);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,7 +79,7 @@ public class Feedbackpage extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(Color.BLACK));
-		panel_1.setBounds(559, 42, 714, 460);
+		panel_1.setBounds(489, 43, 714, 460);
 		contentPane.add(panel_1);
 		
 		JTextArea txt_description = new JTextArea();
@@ -217,7 +223,7 @@ public class Feedbackpage extends JFrame {
 			}
 		});
 		filtercombo.setModel(new DefaultComboBoxModel(new String[] {"All feedback", "By Date"}));
-		filtercombo.setBounds(57, 31, 196, 22);
+		filtercombo.setBounds(62, 76, 196, 22);
 		contentPane.add(filtercombo);
 	}
 }

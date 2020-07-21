@@ -90,15 +90,10 @@ public class studentpage extends JFrame {
 				System.out.println(Eventcombobx.getSelectedItem());
 				if(Eventcombobx.getSelectedItem().equals("All Event")) {
 					desktopPane.removeAll();
-					HomepageAllEvent h;
-					try {
-						h = new HomepageAllEvent(0);
-						h.setVisible(true);
-						desktopPane.add(h);
-					} catch (PropertyVetoException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					homepageEvent h;
+					h = new homepageEvent();
+					h.setVisible(true);
+					desktopPane.add(h);
 					
 					
 				}
@@ -182,18 +177,6 @@ public class studentpage extends JFrame {
 		JLabel label_3 = new JLabel("     ");
 		menuBar.add(label_3);
 		
-		JButton btnRoutine = new JButton("Routine  ");
-		btnRoutine.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				desktopPane.removeAll();
-				RoutineDashboard rd = new RoutineDashboard();
-				rd.setVisible(true);
-				desktopPane.add(rd);
-			}
-		});
-		btnRoutine.setFont(new Font("Dialog", Font.BOLD, 14));
-		menuBar.add(btnRoutine);
-		
 		JLabel label_4 = new JLabel("     ");
 		menuBar.add(label_4);
 		
@@ -202,7 +185,7 @@ public class studentpage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				desktopPane.removeAll();
-				FeedbackDashboard fd = new FeedbackDashboard(0);
+				Feedbackpage fd = new Feedbackpage();//pass 0
 				fd.setVisible(true);
 				desktopPane.add(fd);
 				

@@ -123,10 +123,6 @@ public class addEvent extends JFrame {
 		Cancel.setBounds(562, 467, 139, 25);
 		contentPane.add(Cancel);
 		
-		JButton uploadImg = new JButton("Upload Images");		
-		uploadImg.setBounds(562, 413, 139, 25);
-		contentPane.add(uploadImg);
-		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(496, 116, 17, 110);
 		contentPane.add(scrollBar);
