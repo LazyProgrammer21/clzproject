@@ -200,7 +200,7 @@ public class Mainpage extends JFrame {
 				try {
 				uniID = JOptionPane.showInputDialog("Please Enter your College ID to proceed");
 //				System.out.println(uniID);
-				ss.get
+//				ss.get
 				int id=1816212;
 				try {
 				if(!uniID.isEmpty()) {

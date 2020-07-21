@@ -130,6 +130,7 @@ public class Feedbackpage extends JFrame {
 		btnDelete.setEnabled(false);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(Integer.valueOf(txt_id.getText()));
 				fsi.insertedUpdateDeleteStudent('D', Integer.valueOf(txt_id.getText()), txt_subject.getText(),txt_description.getText());
 				fsi.viewEvent(tbl_feedback);
 				
@@ -146,17 +147,10 @@ public class Feedbackpage extends JFrame {
 		btnAdd.setEnabled(false);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txt_subject.getText().equals("")|| txt_description.getText().equals("")) 
-				{    JOptionPane.showMessageDialog(null,"One or more empty feilds");}
-				else {
-				
-				fsi.insertedUpdateDeleteStudent('i', 0, txt_subject.getText(),txt_description.getText());
-				fsi.viewEvent(tbl_feedback);
-				
-				txt_id.setText(String.valueOf(fi.getId()));
-				txt_subject.setText(fi.getSubject());
-				txt_description.setText(fi.getDescription());
-			}}
+				issueFeedback ia = new issueFeedback();
+				ia.setVisible(true);
+				Feedbackpage.this.dispose();
+			}
 		});
 		btnAdd.setBounds(36, 248, 117, 25);
 		panel.add(btnAdd);

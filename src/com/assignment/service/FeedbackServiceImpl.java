@@ -82,9 +82,9 @@ public class FeedbackServiceImpl {
                  e.printStackTrace();}
               }
         else if(Operation=='D') {
-        	try{String query="DELETE FROM `feedback` WHERE id=?"; 
+        	try{String query="DELETE FROM feedback WHERE id="+id; 
             pst=con.prepareStatement (query);
-            pst.setInt(1,id);
+//            pst.setInt(1,id);
           
             if(pst.executeUpdate()>0){
             //int executeUpdate = ps.executeUpdate();

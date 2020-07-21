@@ -227,6 +227,7 @@ public class viewEvent extends JFrame {
 			}
 			@Override
 			public void keyTyped(KeyEvent e) {
+				System.out.println(txt_search.getText());
 				ef.viewEvent(table);
 				ef.search(table,comboBox_1.getSelectedItem().toString(),txt_search.getText());
 			}
@@ -260,7 +261,7 @@ public class viewEvent extends JFrame {
 			}
 		});
 	
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"IT Club", "Sports Club", "Socio-Cultural CLub", "Free-flow CLub", "Administrative"}));
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"IT club", "Sports Club", "Socio-Cultural Club", "Free-Flow Club", "Administrative"}));
 		comboBox_1.setBounds(74, 155, 77, 22);
 		panel_2.add(comboBox_1);
 		

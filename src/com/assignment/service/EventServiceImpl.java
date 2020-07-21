@@ -28,7 +28,7 @@ public class EventServiceImpl  implements EventService{
 	public void viewEvent(JTable table) {
 		// TODO Auto-generated method stub
 		try 
-		{String query = "SELECT `event_id`, `event_name`, `startDate`, `endDate`, `Description`,`clubName`,`venueName`,`imgid`FROM eventinfo,club,venue,eventimage WHERE club_fk=clubID and venue_fk=venueID and image_fk=imgid";
+		{String query = "SELECT event_id, event_name, startDate, endDate, Description,clubName,venueName,imgid FROM eventinfo,club,venue,eventimage WHERE club_fk=clubID and venue_fk=venueID and image_fk=imgid";
 		pst = con.prepareStatement(query);
 		rs =pst.executeQuery();
 		table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -89,7 +89,7 @@ public class EventServiceImpl  implements EventService{
 	public void fillableEventTable(JTable table,String a) {
 		//filling the event table
 		try{   
-			String query = "SELECT `event_id`, `event_name`, `startDate`, `endDate`, `Description`,`clubName`,`venueName`,`imgid`FROM eventinfo,club,venue,eventimage WHERE CONCAT(`event_id`, `event_name`, `startDate`, `endDate`, `Description`,`clubName`,`venueName`,`imgid`) like ?";
+			String query = "SELECT event_id, event_name, startDate, endDate, Description,clubName,venueName,imgid FROM eventinfo,club,venue,eventimage WHERE CONCAT(`event_id`, `event_name`, `startDate`, `endDate`, `Description`,`clubName`,`venueName`,`imgid`) like ?";
 		        pst=con.prepareStatement(query);
 		        pst.setString(1,"%"+a+"%");
 		        rs =pst.executeQuery();
@@ -127,8 +127,8 @@ public class EventServiceImpl  implements EventService{
 
 	public void search(JTable table,String c,String valueToSearch) {
 		// TODO Auto-generated method stub
-		String a = "SELECT `event_id`, `event_name`, `startDate`, `endDate`, `Description`,`clubName`,`venueName`,`imgid`FROM eventinfo,club,venue,eventimage WHERE club_fk =clubID and venue_fk=venueID and image_fk=imgid and clubName =? and"
-				+ " CONCAT(`event_id`, `event_name`, `startDate`, `endDate`, `Description`,`clubName`,`venueName`,`imgid`) like ?";
+		String a = "SELECT event_id, event_name, startDate, endDate, Description,clubName,venueName,imgid FROM eventinfo,club,venue,eventimage WHERE club_fk =clubID and venue_fk=venueID and image_fk=imgid and clubName =? and"
+				+ " CONCAT( event_name,venueName) like ?";
 		try {
 			pst=con.prepareStatement(a);
 			pst.setString(1,c);

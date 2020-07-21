@@ -366,10 +366,10 @@ public class studentserviceImpl implements studentService{
 	}
 	@Override
 	public boolean getallstudentclzid() {
-boolean stv=false;
+		boolean stv=false;
 
-		
-		String sql ="select  from adminstudentrecord where uniID="+x;
+//		id missing
+		String sql ="select  from adminstudentrecord where uniID=";
 		
 		try {
 			
@@ -393,7 +393,7 @@ boolean stv=false;
 		}
 
 		return stv;
-		return false;
+	
 	}
 
 
