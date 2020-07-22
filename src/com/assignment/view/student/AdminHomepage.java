@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import com.assignment.service.adminService;
+import com.assignment.service.adminServiceImpl;
 import com.assignment.view.Mainpage;
 
 import javax.swing.JDesktopPane;
@@ -128,11 +130,12 @@ public class AdminHomepage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				desktopPane.removeAll();
 				String adminKey = JOptionPane.showInputDialog("Please enter the Key to proceed:");
-				String key = "admin123";
+				adminService as = new adminServiceImpl();
+				as.getadminKey();
 				try {
 					
 					if (!adminKey.isEmpty()) {
-						if(adminKey.equals(key)) {
+						if(adminKey.equals(as.getadminKey())) {
 							
 							JOptionPane.showMessageDialog(null, "Success");
 						administrativepage h = new administrativepage();

@@ -7,6 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.assignment.service.adminService;
+import com.assignment.service.adminServiceImpl;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -53,11 +57,12 @@ public class administrativepage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String adminKey = JOptionPane.showInputDialog("Please enter the Key to proceed:");
-				String key = "admin123";
+				adminService as = new adminServiceImpl();
+				as.getadminKey();
 				try {
 
 					if (!adminKey.isEmpty()) {
-						if(adminKey.equals(key)) {
+						if(adminKey.equals(as.getadminKey())) {
 							
 							JOptionPane.showMessageDialog(null, "Success");
 						changeAdminKey h = new changeAdminKey();
