@@ -1,7 +1,6 @@
 package com.assignment.view.student;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -14,13 +13,14 @@ import com.assignment.model.EventInfo;
 import com.assignment.service.EventService;
 import com.assignment.service.EventServiceImpl;
 
-import net.proteanit.sql.DbUtils;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextField;
@@ -28,9 +28,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -43,6 +44,10 @@ import javax.swing.JScrollPane;
 
 public class homepageEvent extends JInternalFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public JPanel contentPane;
 	private JTable table;
 	private JTextField txt_search;
@@ -55,37 +60,25 @@ public class homepageEvent extends JInternalFrame {
 	EventInfo info = new EventInfo();
 	public JComboBox comboBox_1;
 	
+	private int trigervalue;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					homepageEvent frame = new homepageEvent();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	
+	public homepageEvent(int x) {
+		trigervalue=x;
+		initialize();
 	}
-
-	/**
-	 * Create the frame.
-	 */
-	public homepageEvent() {
+	public void initialize() {
 		con = db.getDBConnection();
-		//ef.fillableEventTable(table,"");
-		//ef.viewEvent( table);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setBorder(null);
 		BasicInternalFrameUI gui = (BasicInternalFrameUI) this.getUI();
 		gui.setNorthPane(null);
 		setSize(1344, 668);	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(0, 0, 1380, 701);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -189,7 +182,7 @@ public class homepageEvent extends JInternalFrame {
 		contentPane.add(panel_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(74, 266, 573, 253);
+		scrollPane.setBounds(20, 228, 675, 253);
 		panel_2.add(scrollPane);
 		
 		table = new JTable();
@@ -216,9 +209,9 @@ public class homepageEvent extends JInternalFrame {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBorder(null);
 		
-		JLabel lblEid = new JLabel("Events");
+		JLabel lblEid = new JLabel("All Events");
 		lblEid.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblEid.setBounds(74, 230, 121, 25);
+		lblEid.setBounds(75, 192, 121, 25);
 		panel_2.add(lblEid);
 		
 		txt_search = new JTextField();
@@ -236,7 +229,7 @@ public class homepageEvent extends JInternalFrame {
 			}
 		});
 		txt_search.setColumns(10);
-		txt_search.setBounds(408, 196, 189, 25);
+		txt_search.setBounds(409, 158, 189, 25);
 		panel_2.add(txt_search);
 		
 		JButton btnView = new JButton("View All");
@@ -247,11 +240,11 @@ public class homepageEvent extends JInternalFrame {
 				txt_search.setEnabled(true);
 			}
 		});
-		btnView.setBounds(327, 544, 89, 23);
+		btnView.setBounds(328, 506, 89, 23);
 		panel_2.add(btnView);
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter Value To Search");
-		lblNewLabel_1.setBounds(267, 192, 142, 33);
+		lblNewLabel_1.setBounds(268, 154, 142, 33);
 		panel_2.add(lblNewLabel_1);
 		
 		comboBox_1 = new JComboBox();
@@ -265,19 +258,49 @@ public class homepageEvent extends JInternalFrame {
 		});
 	
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"IT club", "Sports Club", "Socio-Cultural Club", "Free-Flow Club", "Administrative"}));
-		comboBox_1.setBounds(102, 197, 147, 22);
+		comboBox_1.setBounds(103, 159, 147, 22);
 		panel_2.add(comboBox_1);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(102, 545, 91, 25);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date d=null;
+				ef.insertedUpdateDeleteEvent('D', Integer.parseInt(txt_EventId.getText()), "",d , d,"" , 0, 0);
+				
+			}
+		});
+		if(trigervalue==1) {
+			btnDelete.setVisible(false);
+		}
+		btnDelete.setBounds(103, 507, 91, 25);
 		panel_2.add(btnDelete);
 		
 		JButton btnAddEvent = new JButton("Add event");
-		btnAddEvent.setBounds(205, 544, 109, 25);
+		btnAddEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addEvent e1 = new addEvent();
+				e1.setVisible(true);
+				e1.setLocationRelativeTo(null);
+//				homepageEvent.this.dispose();
+				
+			}
+		});
+		if(trigervalue==1) {
+			btnDelete.setVisible(false);
+		}
+		btnAddEvent.setBounds(206, 506, 109, 25);
 		panel_2.add(btnAddEvent);
 		
 		JButton btnBook = new JButton("Book");
-		btnBook.setBounds(432, 544, 109, 25);
+		btnBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Event has been book. FOr detail Visit clz NoticeBoard");
+			}
+		});
+		if(trigervalue==1) {
+			btnDelete.setVisible(false);
+		}
+		btnBook.setBounds(433, 506, 109, 25);
 		panel_2.add(btnBook);
 	}
 }

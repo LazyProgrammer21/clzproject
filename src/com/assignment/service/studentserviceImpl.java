@@ -3,6 +3,7 @@ package com.assignment.service;
 
 import java.math.BigInteger;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -209,12 +210,13 @@ public class studentserviceImpl implements studentService{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				studentinfo sinfo = new studentinfo();
-				BigInteger cid =  BigInteger.valueOf(rs.getInt(1));
+				BigInteger cid =  BigInteger.valueOf(rs.getInt("CLZID"));
+				
 				sinfo.setClzId(cid);
-				sinfo.setName(rs.getString(2));
+				sinfo.setName(rs.getString("NAME"));
 				sinfo.setSubject(rs.getString(3));
-				sinfo.setSemseter(rs.getString(4));
-				sinfo.setSection(rs.getString(5));
+				sinfo.setSemseter(rs.getString("SEMESTER"));
+				sinfo.setSection(rs.getString("SECTION"));
 		
 			st_info.add(sinfo);
 			
@@ -223,7 +225,8 @@ public class studentserviceImpl implements studentService{
 			
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("helo");
 		}
 		
 		
@@ -342,10 +345,13 @@ public class studentserviceImpl implements studentService{
 	}
 	@Override
 	public boolean forgetpasswordupdate(int id, String newpassword) {
-	
 		boolean x=false;
-		String sql = "update studentinfo set PASSWORD = \'"+newpassword+"'"+"where uniID="+id;
+		System.out.println(id);
+		System.out.println(newpassword);
+		
+		
 		try {
+			String sql = "update studentinfo set PASSWORD = \'"+newpassword+"'"+"where clzID="+id;
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.execute();
 			
@@ -354,8 +360,7 @@ public class studentserviceImpl implements studentService{
 			
 		}
 		catch(SQLException e ) {
-
-			x=false;
+			System.out.println(e);
 		}
 			
 		
@@ -395,6 +400,64 @@ public class studentserviceImpl implements studentService{
 		return stv;
 	
 	}
+	@Override
+	public boolean updatestudentpersonaliztion(studentinfo student,int xq) {
+		boolean x=false;
+	
+		String name=student.getName();
+		String email = student.getEmail();
+		String phone = student.getPhone();
+		String city = student.getAdd_city();
+		String state = student.getAdd_state();
+		Date dob = student.getDob();
+		String zipcode = student.getZipCode();
+		
+		
+		
+		String sql = "update studentinfo "
+				+ "set "
+				+ "NAME = ?, EMAIL = ?,DOB = ?,ADD_CITY = ?,ADD_STATE = ?,"
+				+ "ZIPCODE = ?,PHONE = ?"+
+				"where clzid = ?";
+		
+		   try 
+		   {
+			   PreparedStatement stmt = con.prepareStatement(sql);
+			 
+			
+				stmt.setString(1, name);
+				stmt.setString(2, email);
+				stmt.setDate(3, dob);
+				stmt.setString(4, city);
+				stmt.setString(5, state);
+				stmt.setString(6, zipcode);
+				stmt.setString(7, phone);
+				stmt.setInt(8, xq);
+				
+				
+				
+			
+			
+				
+				stmt.execute();
+			
+			   
+			   x=true;
+			
+			} 
+		   catch (SQLException e) {
+			
+			      System.out.println(e);
+			      x=false;
+		    }
+			
+		
+		
+	
+		return x;
+	
+	}
+	
 
 
 

@@ -45,7 +45,6 @@ public class StudentRecordAdmin extends JInternalFrame {
 	private JTextField zipcode;
 	private JTextField number;
 	private JTable table;
-	private JTextField textField_10;
 	int ids=0;
 	/**
 	 * Launch the application.
@@ -96,7 +95,7 @@ public class StudentRecordAdmin extends JInternalFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		displatTable(table);
+	
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -126,26 +125,7 @@ public class StudentRecordAdmin extends JInternalFrame {
 		table.getColumnModel().getColumn(4).setPreferredWidth(114);
 	
 		table.setBorder(new LineBorder(Color.BLACK));
-		
-		JComboBox <String>comboBox_3 = new JComboBox<String>();
-		comboBox_3.setEditable(true);
-		comboBox_3.setBounds(12, 24, 124, 34);
-		comboBox_3.addItem("L4");
-		comboBox_3.addItem("L5");
-		comboBox_3.addItem("L6");
-		comboBox_3.setSelectedItem("Filter Stduent");
-		
-		panel.add(comboBox_3);
-		
-		textField_10 = new JTextField();
-		textField_10.setBounds(143, 24, 167, 32);
-		panel.add(textField_10);
-		textField_10.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Search");
-		btnNewButton.setBounds(322, 28, 94, 25);
-		panel.add(btnNewButton);
-		
+		displatTable(table);
 		JLabel label_13 = new JLabel("");
 		label_13.setFont(new Font("Dialog", Font.BOLD, 14));
 		label_13.setBounds(410, 115, 64, 15);
@@ -169,12 +149,15 @@ public class StudentRecordAdmin extends JInternalFrame {
 			
 				}
 				catch(Exception e1) {
-					e1.printStackTrace();
+//					e1.printStackTrace();
+					System.out.println("helo");
 				}
-				displatTable(table);
+			
 				
 			}
+			
 		});
+		displatTable(table);
 		btnDeleteStudent.setBounds(322, 275, 152, 25);
 		panel.add(btnDeleteStudent);
 		
@@ -264,10 +247,6 @@ public class StudentRecordAdmin extends JInternalFrame {
 		number.setColumns(10);
 		number.setBounds(263, 366, 162, 24);
 		panel_1.add(number);
-		
-		JButton btnViewEvent = new JButton("View Event");
-		btnViewEvent.setBounds(307, 416, 117, 25);
-		panel_1.add(btnViewEvent);
 		
 		gender = new JTextField();
 		gender.setColumns(10);

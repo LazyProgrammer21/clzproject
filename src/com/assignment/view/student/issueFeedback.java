@@ -105,7 +105,7 @@ public class issueFeedback extends JFrame {
 				txt_description.setText("");
 				
 				issueFeedback.this.dispose();
-				Feedbackpage fp=new Feedbackpage();
+				Feedbackpage fp=new Feedbackpage(0);
 				fp.setVisible(true);
 				
 			}}
@@ -118,7 +118,7 @@ public class issueFeedback extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			issueFeedback.this.dispose();
-			Feedbackpage fp = new Feedbackpage();
+			Feedbackpage fp = new Feedbackpage(0);
 			fp.setVisible(true);
 			
 			}

@@ -84,7 +84,7 @@ public class GuestUser extends JFrame {
 		btnFeedBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				desktopPane.removeAll();
-				Feedbackpage fd = new Feedbackpage();
+				Feedbackpage fd = new Feedbackpage(1);
 				fd.setVisible(true);
 				desktopPane.add(fd);
 			}
@@ -95,7 +95,7 @@ public class GuestUser extends JFrame {
 		btnEventDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				desktopPane.removeAll();
-				homepageEvent gh = new homepageEvent();
+				homepageEvent gh = new homepageEvent(1);
 				gh.setVisible(true);
 				desktopPane.add(gh);
 			}

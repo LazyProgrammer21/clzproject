@@ -33,30 +33,19 @@ public class studentpage extends JFrame {
 	private JPanel contentPane;
 	public int trigger_for_btndisable;
 	studentinfo ss = new studentinfo();
+	int passclzidtopersonalization;
 	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					studentpage frame = new studentpage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	
+	
+	
+	public studentpage(int x) {
+		passclzidtopersonalization=x;
+			initialze();
+	
 	}
-
-	/**
-	 * Create the frame.
-	 * @throws PropertyVetoException 
-	 */
-	
-	public studentpage() throws PropertyVetoException {
+	public void initialze()  {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		setBounds(100, 100, 714, 464);
@@ -91,7 +80,7 @@ public class studentpage extends JFrame {
 				if(Eventcombobx.getSelectedItem().equals("All Event")) {
 					desktopPane.removeAll();
 					homepageEvent h;
-					h = new homepageEvent();
+					h = new homepageEvent(1);
 					h.setVisible(true);
 					desktopPane.add(h);
 					
@@ -103,13 +92,13 @@ public class studentpage extends JFrame {
 		
 		
 		Eventcombobx.addItem("All Event");
-		Eventcombobx.addItem("Upcomming Event");
-		Eventcombobx.addItem("Previous Event");
-		Eventcombobx.addItem("My Events");
-		Eventcombobx.addItem("Event History");		
+	
 		
 		JLabel label = new JLabel("     ");
 		menuBar.add(label);
+		JLabel label1 = new JLabel("     ");
+		menuBar.add(label1);
+
 		menuBar.add(Eventcombobx);
 		
 		JLabel label_18 = new JLabel("     ");
@@ -165,7 +154,7 @@ public class studentpage extends JFrame {
 				
 				desktopPane.removeAll();
 		
-				StudentPersonalization sp = new StudentPersonalization();
+				StudentPersonalization sp = new StudentPersonalization(passclzidtopersonalization);
 				sp.setVisible(true);
 				desktopPane.add(sp);
 				
@@ -185,7 +174,7 @@ public class studentpage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				desktopPane.removeAll();
-				Feedbackpage fd = new Feedbackpage();//pass 0
+				Feedbackpage fd = new Feedbackpage(0);//pass 0
 				fd.setVisible(true);
 				desktopPane.add(fd);
 				

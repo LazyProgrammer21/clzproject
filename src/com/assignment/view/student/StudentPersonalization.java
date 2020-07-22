@@ -5,8 +5,11 @@ package com.assignment.view.student;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.math.BigInteger;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +42,15 @@ public class StudentPersonalization extends JInternalFrame {
 	private JTextField state;
 	private JTextField zipcode;
 	private JTextField phone;
-	private JTextField totalnumbookevent;
 	private BigInteger id1;
+	private int gettheclzid;
 	studentService ss = new studentserviceImpl();
-
-	public StudentPersonalization() {
 	
-		initialize();
+	private JTextField dob1;
+
+	public StudentPersonalization(int x) {
+	gettheclzid=x;
+	initialize();
 	}
 
 	public void initialize() {
@@ -67,164 +72,148 @@ public class StudentPersonalization extends JInternalFrame {
 		
 		JLabel label = new JLabel("ID");
 		label.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label.setBounds(188, 10, 70, 28);
+		label.setBounds(191, 68, 70, 28);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("Name");
 		label_1.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_1.setBounds(188, 64, 70, 25);
+		label_1.setBounds(191, 113, 70, 25);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("DOB");
 		label_2.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_2.setBounds(188, 134, 70, 25);
+		label_2.setBounds(191, 192, 70, 25);
 		panel.add(label_2);
-		
-		JLabel label_3 = new JLabel("Gender");
-		label_3.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_3.setBounds(188, 159, 70, 25);
-		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("Add_city");
 		label_4.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_4.setBounds(188, 196, 70, 25);
+		label_4.setBounds(191, 240, 70, 25);
 		panel.add(label_4);
 		
 		JLabel label_5 = new JLabel("Address State");
 		label_5.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_5.setBounds(188, 233, 121, 25);
+		label_5.setBounds(191, 291, 121, 25);
 		panel.add(label_5);
 		
 		JLabel label_6 = new JLabel("zipcode");
 		label_6.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_6.setBounds(188, 270, 83, 25);
+		label_6.setBounds(191, 328, 83, 25);
 		panel.add(label_6);
 		
 		JLabel label_7 = new JLabel("Phonen Number");
 		label_7.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_7.setBounds(188, 319, 141, 25);
+		label_7.setBounds(191, 377, 141, 25);
 		panel.add(label_7);
-		
-		JLabel label_8 = new JLabel("level(CLass)");
-		label_8.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_8.setBounds(188, 356, 94, 25);
-		panel.add(label_8);
 		
 		JLabel label_10 = new JLabel("Email");
 		label_10.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_10.setBounds(188, 91, 70, 31);
+		label_10.setBounds(191, 149, 70, 31);
 		panel.add(label_10);
-		
-		JLabel label_11 = new JLabel("Subject");
-		label_11.setFont(new Font("FreeSans", Font.BOLD, 16));
-		label_11.setBounds(188, 393, 100, 25);
-		panel.add(label_11);
-		
+	
 		id = new JTextField();
 		id.setEditable(false);
-		id.setText("No update");
 		id.setColumns(10);
-		id.setBounds(394, 12, 162, 24);
+		id.setBounds(397, 70, 206, 24);
 		panel.add(id);
 		
 		name = new JTextField();
 		name.setColumns(10);
-		name.setBounds(394, 51, 162, 24);
+		name.setBounds(397, 109, 206, 24);
 		panel.add(name);
 		
 		email = new JTextField();
 		email.setColumns(10);
-		email.setBounds(394, 87, 162, 24);
+		email.setBounds(397, 145, 206, 24);
 		panel.add(email);
 		
 		city = new JTextField();
 		city.setColumns(10);
-		city.setBounds(394, 185, 162, 24);
+		city.setBounds(397, 243, 206, 24);
 		panel.add(city);
 		
 		state = new JTextField();
 		state.setColumns(10);
-		state.setBounds(394, 233, 162, 24);
+		state.setBounds(397, 291, 206, 24);
 		panel.add(state);
 		
 		zipcode = new JTextField();
 		zipcode.setColumns(10);
-		zipcode.setBounds(394, 270, 162, 24);
+		zipcode.setBounds(397, 328, 206, 24);
 		panel.add(zipcode);
 		
 		phone = new JTextField();
 		phone.setColumns(10);
-		phone.setBounds(394, 320, 162, 24);
+		phone.setBounds(397, 378, 206, 24);
 		panel.add(phone);
 		
-		JRadioButton male = new JRadioButton("Male");
-		male.setBounds(391, 159, 70, 23);
-		panel.add(male);
-		
-		JRadioButton female = new JRadioButton("Female");
-		female.setBounds(466, 159, 90, 23);
-		panel.add(female);
-		
-		JRadioButton other = new JRadioButton("Other");
-		other.setBounds(564, 159, 90, 23);
-		panel.add(other);
-		
 		JDateChooser dob = new JDateChooser();
-		dob.setBounds(394, 123, 171, 28);
+		dob.setBounds(498, 189, 111, 28);
 		panel.add(dob);
-		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(394, 392, 162, 24);
-		panel.add(comboBox);
 		
 		JButton update = new JButton("Update");
 		update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setValue();
+			
+				
+				studentinfo sinfo = new studentinfo();
+				
+				sinfo.setName(name.getText());
+				sinfo.setEmail(email.getText());
+				sinfo.setDob(new Date(dob.getDate().getTime()));
+				sinfo.setAdd_city(city.getText());
+				sinfo.setAdd_state(	state.getText());
+				sinfo.setPhone(phone.getText());
+				sinfo.setZipCode(zipcode.getText());
+				if(ss.updatestudentpersonaliztion(sinfo, gettheclzid)) {
+					JOptionPane.showMessageDialog(null, "data updated Successfully");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "update uncessfull");
+				}
+				
+				
+				
+				
 			
 			}
 		});
-		update.setBounds(588, 392, 117, 25);
+		update.setBounds(613, 340, 117, 25);
 		panel.add(update);
 		
 		JButton cancel = new JButton("Cancel");
-		cancel.setBounds(588, 429, 117, 25);
+		cancel.setBounds(613, 377, 117, 25);
 		panel.add(cancel);
 		
-		JLabel lblSection = new JLabel("Section");
-		lblSection.setFont(new Font("FreeSans", Font.BOLD, 16));
-		lblSection.setBounds(188, 430, 100, 25);
-		panel.add(lblSection);
+		JButton btnView = new JButton("view");
+		btnView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setValue();
+			}
+		});
+		btnView.setBounds(613, 308, 117, 25);
+		panel.add(btnView);
 		
-		JLabel lblTotalBookedEvent = new JLabel("Total Booked Event");
-		lblTotalBookedEvent.setFont(new Font("FreeSans", Font.BOLD, 16));
-		lblTotalBookedEvent.setBounds(188, 459, 156, 25);
-		panel.add(lblTotalBookedEvent);
-		
-		totalnumbookevent = new JTextField();
-		totalnumbookevent.setColumns(10);
-		totalnumbookevent.setBounds(394, 464, 162, 24);
-		panel.add(totalnumbookevent);
-		
-		JButton btnViewMyEvent = new JButton("View My event");
-		btnViewMyEvent.setBounds(564, 463, 156, 25);
-		panel.add(btnViewMyEvent);
-		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setBounds(394, 360, 162, 24);
-		panel.add(comboBox_1);
-		
-		JComboBox<String> comboBox_2 = new JComboBox<String>();
-		comboBox_2.setBounds(394, 427, 162, 24);
-		panel.add(comboBox_2);
+		dob1 = new JTextField();
+		dob1.setEditable(false);
+		dob1.setColumns(10);
+		dob1.setBounds(397, 192, 102, 24);
+		panel.add(dob1);
 
 	}
 	private void setValue() {
 	
-		Mainpage mp = new Mainpage();
+
 	
-//		List<studentinfo> s_info = ss.getstudentDetailbyID(mp.settheclzid());
-//		System.out.println(s_info);
+		studentinfo s_info = ss.getStudentdata(gettheclzid);
+		id.setText(s_info.getClzId().toString());
+		name.setText(s_info.getName());
+		email.setText(s_info.getEmail());
+		city.setText(s_info.getAdd_city());
+		state.setText(s_info.getAdd_state());
+		zipcode.setText(s_info.getZipCode());
+		phone.setText(s_info.getPhone());
+		dob1.setText(s_info.getDob().toString());
+	
 	
 	
 	

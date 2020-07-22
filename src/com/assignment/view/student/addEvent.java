@@ -5,32 +5,57 @@ package com.assignment.view.student;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
+import com.assignment.service.EventServiceImpl;
+import com.assignment.view.Mainpage;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class addEvent extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField eventName;
-	private JTextField venue;
+	private JTextField txt_eventName;
+	EventServiceImpl esi = new EventServiceImpl();
 	
 
-
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					addEvent frame = new addEvent();
+					frame.setVisible(true);
+//					frame.setLocationRelativeTo(null);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
 	public addEvent( ) {
 	
 		
 		
-		
+		setUndecorated(true);
+		setSize(1344, 668);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 801, 570);
 		contentPane = new JPanel();
@@ -74,50 +99,39 @@ public class addEvent extends JFrame {
 		lblOrganised.setBounds(71, 438, 127, 25);
 		contentPane.add(lblOrganised);
 		
-		eventName = new JTextField();
-		eventName.setBounds(242, 69, 242, 31);
-		contentPane.add(eventName);
-		eventName.setColumns(10);
+		txt_eventName = new JTextField();
+		txt_eventName.setBounds(242, 69, 242, 31);
+		contentPane.add(txt_eventName);
+		txt_eventName.setColumns(10);
 		
-		JComboBox<String> Club = new JComboBox<String>();
-		Club.setBounds(242, 249, 242, 25);
-		Club.setEditable(true);
-		Club.addItem("IT Club");
-		Club.addItem("Free-Flow Club");
-		Club.addItem("Socio-Cultural Club");
-		Club.addItem("Sports Club");
-		Club.addItem("Others");
-		Club.setSelectedItem("Select club");
-		contentPane.add(Club);
+		JComboBox<String> cmbClub = new JComboBox<String>();
+		cmbClub.setBounds(242, 249, 242, 25);
+		cmbClub.setEditable(true);
+		cmbClub.addItem("IT Club");
+		cmbClub.addItem("Free-Flow Club");
+		cmbClub.addItem("Socio-Cultural Club");
+		cmbClub.addItem("Sports Club");
+		cmbClub.addItem("Others");
+		contentPane.add(cmbClub);
 		
-		venue = new JTextField();
-		venue.setBounds(238, 286, 246, 25);
-		contentPane.add(venue);
-		venue.setColumns(10);
+		JComboBox cmbVenue = new JComboBox();
+		cmbVenue.setModel(new DefaultComboBoxModel(new String[] {"College Ground", "Seminar Hall", "College Hall"}));
+		cmbVenue.setBounds(242, 289, 229, 22);
+		contentPane.add(cmbVenue);
 		
-		JDateChooser startDate = new JDateChooser();
-		startDate.setBounds(242, 323, 242, 31);
-		contentPane.add(startDate);
+		JDateChooser txt_startDate = new JDateChooser();
+		txt_startDate.setBounds(242, 323, 242, 31);
+		contentPane.add(txt_startDate);
 		
-		JDateChooser endDate = new JDateChooser();
-		endDate.setBounds(242, 366, 242, 25);
-		contentPane.add(endDate);
+		JDateChooser txt_endDate = new JDateChooser();
+		txt_endDate.setBounds(242, 366, 242, 25);
+		contentPane.add(txt_endDate);
 		
-		JTextArea EventInfo = new JTextArea();
-		EventInfo.setLineWrap(true);
-		EventInfo.setRows(10);
-		EventInfo.setBounds(242, 116, 242, 110);
-		contentPane.add(EventInfo);
-		
-		JTextArea organisedBy = new JTextArea();
-		organisedBy.setRows(10);
-		organisedBy.setLineWrap(true);
-		organisedBy.setBounds(242, 403, 242, 89);
-		contentPane.add(organisedBy);
-		
-		JButton AddEvent = new JButton("Add");
-		AddEvent.setBounds(562, 439, 139, 25);
-		contentPane.add(AddEvent);
+		JTextArea txt_description = new JTextArea();
+		txt_description.setLineWrap(true);
+		txt_description.setRows(10);
+		txt_description.setBounds(242, 116, 242, 110);
+		contentPane.add(txt_description);
 		
 		JButton Cancel = new JButton("Cancel");
 		Cancel.setBounds(562, 467, 139, 25);
@@ -130,5 +144,31 @@ public class addEvent extends JFrame {
 		JScrollBar scrollBar_1 = new JScrollBar();
 		scrollBar_1.setBounds(496, 403, 17, 89);
 		contentPane.add(scrollBar_1);
+		
+		JTextArea textAreaOrg = new JTextArea();
+		textAreaOrg.setBounds(242, 416, 242, 76);
+		contentPane.add(textAreaOrg);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(esi.insertedUpdateDeleteEvent('i', 0,txt_eventName.getText(),new Date(txt_startDate.getDate().getTime()),new Date(txt_endDate.getDate().getTime()),txt_description.getText(),cmbClub.getSelectedIndex()+1,cmbVenue.getSelectedIndex()+1))
+				{
+					
+					addEvent.this.dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "SOrry");
+				}
+				txt_eventName.setText("");
+				txt_description.setText("");
+				
+				
+			}
+		});
+		btnAdd.setBounds(562, 438, 139, 25);
+		contentPane.add(btnAdd);
+		
+		
 	}
 }

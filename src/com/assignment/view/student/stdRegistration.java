@@ -56,6 +56,7 @@ public class stdRegistration extends JFrame {
 	private JTextField phone;
 	private JPasswordField password;
 	private String stdName="";
+	private int currentuniid;
 	
 	
 	String sid="";
@@ -75,23 +76,9 @@ public class stdRegistration extends JFrame {
 	
 	
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					stdRegistration frame = new stdRegistration();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-						
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	public stdRegistration() {
-		
+
+	public stdRegistration(int cd) {
+		currentuniid=cd;
 		initialize();
 	
 	}
@@ -359,9 +346,9 @@ public class stdRegistration extends JFrame {
 				 
 				
 				
-				if(stdservice.newRegister(s_info, subid, semid, secid)&&stdservice.updateAdmintable(mp.sendtheuniid()))
+				if(stdservice.newRegister(s_info, subid, semid, secid)&&stdservice.updateAdmintable(currentuniid))
 				{
-					
+					System.out.println(mp.sendtheuniid());
 					JOptionPane.showMessageDialog(null, "Added Success");
 					
 				
@@ -446,6 +433,15 @@ public class stdRegistration extends JFrame {
 		lblSubject_1.setFont(new Font("FreeSans", Font.BOLD, 16));
 		lblSubject_1.setBounds(188, 379, 94, 25);
 		panel.add(lblSubject_1);
+		
+		JButton btnClickme = new JButton("clickme ");
+		btnClickme.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mp.sendtheuniid();
+			}
+		});
+		btnClickme.setBounds(628, 237, 117, 25);
+		panel.add(btnClickme);
 		
 	
 		

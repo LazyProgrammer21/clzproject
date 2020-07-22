@@ -47,24 +47,19 @@ public class Feedbackpage extends JInternalFrame {
 	FeedbackInfo fi = new FeedbackInfo();
 	FeedbackServiceImpl fsi = new FeedbackServiceImpl();
 	private JTextField txt_date;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Feedbackpage frame = new Feedbackpage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	int triggervalue;
 
-	/**
-	 * Create the frame.
-	 */
-	public Feedbackpage() {
+
+
+	
+	public Feedbackpage(int x) {
+		triggervalue=x;
+		initialize();
+	}
+	
+	
+	
+	public void initialize() {
 		setBorder(null);
 		BasicInternalFrameUI gui = (BasicInternalFrameUI) this.getUI();
 		gui.setNorthPane(null);
@@ -193,18 +188,22 @@ public class Feedbackpage extends JInternalFrame {
 				
 			}
 		});
+		displaytable();
 		tbl_feedback.setBounds(26, 84, 301, 136);
 		panel.add(tbl_feedback);
 		
 		JButton btnNewButton = new JButton("View");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fsi.viewEvent(tbl_feedback);
+				
 				btnAdd.setEnabled(true);
 				btnEdit.setEnabled(true);
 				btnDelete.setEnabled(true);
 			}
 		});
+		if(triggervalue==1) {
+			btnNewButton.setVisible(false);
+		}
 		btnNewButton.setBounds(36, 286, 117, 23);
 		panel.add(btnNewButton);
 		
@@ -225,5 +224,8 @@ public class Feedbackpage extends JInternalFrame {
 		filtercombo.setModel(new DefaultComboBoxModel(new String[] {"All feedback", "By Date"}));
 		filtercombo.setBounds(62, 76, 196, 22);
 		contentPane.add(filtercombo);
+	}
+	void displaytable() {
+		fsi.viewEvent(tbl_feedback);
 	}
 }

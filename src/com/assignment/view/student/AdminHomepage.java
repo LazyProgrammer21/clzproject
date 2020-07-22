@@ -110,7 +110,7 @@ public class AdminHomepage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				trigger_for_btn_disable = 1;
 				desktopPane.removeAll();
-				Feedbackpage fd = new Feedbackpage();//pass triiger for btn disable
+				Feedbackpage fd = new Feedbackpage(1);//pass triiger for btn disable
 				fd.setVisible(true);
 				desktopPane.add(fd);
 				
@@ -186,7 +186,7 @@ public class AdminHomepage extends JFrame {
 				homepageEvent event;
 				trigger_for_btn_disable = 1;
 				desktopPane.removeAll();
-				event = new homepageEvent();
+				event = new homepageEvent(0);
 //					event.btnCancelEvent.disabled();
 				desktopPane.add(event).setVisible(true);
 				

@@ -7,11 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.assignment.service.studentService;
+import com.assignment.service.studentserviceImpl;
 import com.assignment.view.Mainpage;
 
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -22,11 +26,12 @@ import java.awt.event.ActionEvent;
 public class forgetPassword extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 	private JLabel lblStudentIdIs;
 	static Mainpage mp = new Mainpage();
+	studentService ss = new studentserviceImpl();
+	int clzid;
 
 	/**
 	 * Launch the application.
@@ -47,7 +52,12 @@ public class forgetPassword extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public forgetPassword() {
+	public forgetPassword(int x) {
+		System.out.println(x);
+		clzid=x;
+		initialize();
+	}
+	public void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 597, 516);
 		setUndecorated(true);
@@ -57,11 +67,6 @@ public class forgetPassword extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(296, 194, 237, 34);
-		contentPane.add(textField);
-		textField.setColumns(10);
 		
 		JLabel lblNewPassword = new JLabel("New Password:");
 		lblNewPassword.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -73,11 +78,6 @@ public class forgetPassword extends JFrame {
 		lblConfirmPassword.setBounds(74, 329, 204, 34);
 		contentPane.add(lblConfirmPassword);
 		
-		JLabel lblPcpsId = new JLabel("PCPS ID:");
-		lblPcpsId.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblPcpsId.setBounds(74, 192, 187, 34);
-		contentPane.add(lblPcpsId);
-		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(296, 268, 237, 34);
 		contentPane.add(passwordField);
@@ -86,7 +86,7 @@ public class forgetPassword extends JFrame {
 		passwordField_1.setBounds(296, 331, 237, 34);
 		contentPane.add(passwordField_1);
 		
-		lblStudentIdIs = new JLabel("**Student ID is your clz ID Number**");
+		lblStudentIdIs = new JLabel("**Are you sure want to Proceed.**");
 		lblStudentIdIs.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblStudentIdIs.setBounds(105, 134, 401, 34);
 		contentPane.add(lblStudentIdIs);
@@ -94,11 +94,34 @@ public class forgetPassword extends JFrame {
 		JButton btnNewButton = new JButton("Confirm");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//database code here...
+//				System.out.println(passwordField.getText());
+//				System.out.println(passwordField_1.getText());
+				
+				if(passwordField.getText().equals(passwordField_1.getText())) {
+					try {
+						System.out.println(clzid);
+						if(ss.forgetpasswordupdate(clzid, passwordField.getText())) {
+							JOptionPane.showMessageDialog(null, "password UPdated");
+							mp.setVisible(true);
+							disposePage();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Password update failed check you CLZID");
+						}
+				
+					
+					}
+					catch(Exception q) {
+						System.out.println("Hello");
+					}
+				
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Try Again");
+				}
 				
 				
-				mp.setVisible(true);
-				disposePage();
+			
 				
 				
 			}

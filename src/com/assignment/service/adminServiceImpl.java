@@ -19,23 +19,26 @@ public class adminServiceImpl implements adminService {
 
 	@Override
 	public boolean change_AdminKey(String adminkey) {
-		String sql = "update adminrecord set adminkey="+adminkey+" where id=1";
+		boolean x=false;
+	
 		try {
+			String sql =  "update adminrecord set ADMINKEY = \'"+adminkey+"'"+"where ID=1";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.execute();
 			
-			
+			x=true;
 			
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			x=false;
+			System.out.println("helo");
 		}
 
 		
 		
 		
 		
-		return false;
+		return x;
 	}
 
 	@Override

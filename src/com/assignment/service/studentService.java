@@ -21,6 +21,8 @@ public interface studentService {
 	boolean deletestudentrecord(int id);
 	boolean forgetpasswordupdate(int id, String newpassword);
 	boolean getallstudentclzid();
+	boolean updatestudentpersonaliztion(studentinfo student, int id);
+	
 
 
 }

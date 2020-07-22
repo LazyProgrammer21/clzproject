@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.assignment.service.adminService;
+import com.assignment.service.adminServiceImpl;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -22,25 +26,9 @@ public class changeAdminKey extends JFrame {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					changeAdminKey frame = new changeAdminKey();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
+
+
 	public changeAdminKey() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 654, 524);
@@ -82,7 +70,18 @@ public class changeAdminKey extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//database ma gayerw data store garne
+				if(passwordField.getText().equals(passwordField_1.getText())) {
+					
+					adminService as = new adminServiceImpl();
+					
+					as.change_AdminKey(passwordField.getText());
+					
+				}
+				else {
+					JOptionPane.showConfirmDialog(null, "Input Password doesnot match");
+				}
+				
+				
 				JOptionPane.showMessageDialog(null, "Success");
 				changeAdminKey.this.dispose();
 			}

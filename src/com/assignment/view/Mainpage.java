@@ -51,6 +51,7 @@ public class Mainpage extends JFrame {
 	 private String guest_email;
 	 private String uniid;
 	 private int cd=0;
+	 private int numid;
 	
 	 studentService ss = new studentserviceImpl();
 	 BigInteger bg=null;
@@ -85,7 +86,7 @@ public class Mainpage extends JFrame {
 		setTitle("PCPSKIOSK");
 		setResizable(false);
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage("/Users/hunte/git/PCPSkiosk/images/appicon.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/Users/hunte/git/clzproject/images/appicon.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 807, 508);
 		setLocationRelativeTo(null);
@@ -101,12 +102,12 @@ public class Mainpage extends JFrame {
 		mainpanel.setLayout(null);
 		
 		JLabel Pcpslogo = new JLabel("");
-		Pcpslogo.setIcon(new ImageIcon("/Users/hunte/git/PCPSkiosk/images/pcpslogo.jpg"));
+		Pcpslogo.setIcon(new ImageIcon("/Users/hunte/git/clzproject/images/pcpslogo.jpg"));
 		Pcpslogo.setBounds(47, 34, 177, 97);
 		mainpanel.add(Pcpslogo);
 		
 		JLabel Uoblogo = new JLabel("");
-		Uoblogo.setIcon(new ImageIcon("/Users/hunte/git/PCPSkiosk/images/uoblogo.jpg"));
+		Uoblogo.setIcon(new ImageIcon("/Users/hunte/git/clzproject/images/uoblogo.jpg"));
 		Uoblogo.setBounds(541, 34, 177, 97);
 		mainpanel.add(Uoblogo);
 		
@@ -133,15 +134,18 @@ public class Mainpage extends JFrame {
 		infolink.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {
 				uniid = JOptionPane.showInputDialog("Please Enter your UniversityID to proceed>>");	
-				 cd = Integer.parseInt(uniid);
-				 System.out.println(cd);
+				cd = Integer.parseInt(uniid);
+				sendtheuniid();
+			
 				try {
 					
 				
 					try {
 						if(!ss.checkstatuscolumn_of_studentadminrecord(cd)) {
 							 cd = Integer.parseInt(uniid);
+							
 							return;
 						}
 					else {
@@ -161,7 +165,7 @@ public class Mainpage extends JFrame {
 							long lvalue=new BigInteger(uniid).longValue();
 							
 							if(lvalue==ss.getuniIDdb(new BigInteger(uniid))){
-								stdRegistration rg = new stdRegistration();
+								stdRegistration rg = new stdRegistration(cd);
 								rg.setVisible(true);
 								
 								disposeMainpage();
@@ -190,6 +194,10 @@ public class Mainpage extends JFrame {
 				}
 				
 			}
+			catch(Exception x) {
+				System.out.println("null");
+			}
+			}
 		});
 		infolink.setBounds(262, 323, 268, 38);
 		mainpanel.add(infolink);
@@ -199,24 +207,15 @@ public class Mainpage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				uniID = JOptionPane.showInputDialog("Please Enter your College ID to proceed");
-//				System.out.println(uniID);
-//				ss.get
-				int id=1816212;
-				try {
+				settheclzid1();
+	
+			try {
 				if(!uniID.isEmpty()) {
-					int uni_id = Integer.parseInt(uniID);
-					if(id==uni_id) {
-				JOptionPane.showMessageDialog(null, "Authentication Success");
-				forgetPassword pass = new forgetPassword();
+					
+				forgetPassword pass = new forgetPassword(settheclzid1());
 				pass.setVisible(true);
 				disposeMainpage();
-				
-				}
-					else {
-						JOptionPane.showMessageDialog(null, "Contact to Admin or Try Again!!","Alert",JOptionPane.WARNING_MESSAGE);
-						
-					}
-					
+	
 				}
 				
 				
@@ -247,35 +246,31 @@ public class Mainpage extends JFrame {
 		
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-				try {
-					studentpage page;
-						 bg = new BigInteger(studentid.getText());
-					if(isnumeric(studentid.getText())) {
-					if(ss.studentloginIn(bg, password.getText())) {
-						JOptionPane.showMessageDialog(null, "You are logged In");
-	
-						page = new studentpage();
-						page.setVisible(true);
+					numid=Integer.parseInt(studentid.getText());
+					settheclzid();
+				studentpage page;
+					 bg = new BigInteger(studentid.getText());
+				if(isnumeric(studentid.getText())) {
+				if(ss.studentloginIn(bg, password.getText())) {
+					JOptionPane.showMessageDialog(null, "You are logged In");
 
-						disposeMainpage();
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "Worng Username and Password");
-					}
+					page = new studentpage(settheclzid());
+					page.setVisible(true);
 
-						studentid.setText("");
-						password.setText("");
-	
+					disposeMainpage();
 				}
-					
-					else {
-						JOptionPane.showMessageDialog(null, "cannot be string");
-						}	
+				else {
+					JOptionPane.showMessageDialog(null, "Worng Username and Password");
+				}
+
+					studentid.setText("");
+					password.setText("");
+
+}
+				
+				else {
+					JOptionPane.showMessageDialog(null, "cannot be string");
 					}
-					catch (PropertyVetoException e) {
-					JOptionPane.showMessageDialog(null, "Try again!");
-					
-				}
 			
 				}
 				catch (Exception e) {
@@ -396,17 +391,17 @@ public class Mainpage extends JFrame {
 		
 		return x;
 	}
-	public BigInteger settheclzid() {
+	public int settheclzid() {
 		
-		BigInteger bg = new BigInteger(studentid.getText());
-		System.out.println(bg);
-		return bg;
-
-	
+		return numid;
+	}
+	public int settheclzid1() {
+		
+		return Integer.parseInt(uniID);
 	}
 	public int sendtheuniid() {
-		this.cd=cd;
-		System.out.println(cd);
+		
+	
 		return cd;
 	}
 	
