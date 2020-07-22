@@ -199,7 +199,7 @@ public class Mainpage extends JFrame {
 			}
 			}
 		});
-		infolink.setBounds(262, 323, 268, 38);
+		infolink.setBounds(262, 323, 292, 38);
 		mainpanel.add(infolink);
 		
 		JButton ForgetPasswordbtn = new JButton("Forget Password");
