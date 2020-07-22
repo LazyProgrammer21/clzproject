@@ -188,24 +188,25 @@ public class studentserviceImpl implements studentService{
 	public List<studentinfo> getstudentDetailbyID() {
 		//display===
 		List<studentinfo> st_info = new ArrayList<>();
-		String sql = " select\r\n" + 
-				"studentinfo.clzid,studentinfo.name,subjectcourse.name,semester.semester,section.section \r\n" + 
-				"from\r\n" + 
-				"studentinfo\r\n" + 
-				"inner join\r\n" + 
-				"semester\r\n" + 
-				"on\r\n" + 
-				"studentinfo.semid=semester.semid\r\n" + 
-				"inner join\r\n" + 
-				"section\r\n" + 
-				"on\r\n" + 
-				"studentinfo.sectionid=section.sectionid \r\n" + 
-				"inner join\r\n" + 
-				"subjectcourse\r\n" + 
-				"on\r\n" + 
-				"studentinfo.courseid=subjectcourse.courseid";
+		
 		
 		try {
+			String sql = " select\r\n" + 
+					" studentinfo.clzid,studentinfo.name,subjectcourse.name,semester.semester,section.section \r\n" + 
+					"				from\r\n" + 
+					"				studentinfo\r\n" + 
+					"				inner join\r\n" + 
+					"				semester\r\n" + 
+					"				on\r\n" + 
+					"				studentinfo.semid=semester.semid \r\n" + 
+					"				inner join\r\n" + 
+					"				section\r\n" + 
+					"				on\r\n" + 
+					"				studentinfo.sectionid=section.sectionid \r\n" + 
+					"				inner join\r\n" + 
+					"				subjectcourse\r\n" + 
+					"				on\r\n" + 
+					"				studentinfo.courseid=subjectcourse.courseid";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
@@ -226,7 +227,8 @@ public class studentserviceImpl implements studentService{
 		}
 		catch(SQLException e) {
 //			e.printStackTrace();
-			System.out.println("helo");
+//			System.out.println("helo");
+//			System.out.println("helo");
 		}
 		
 		

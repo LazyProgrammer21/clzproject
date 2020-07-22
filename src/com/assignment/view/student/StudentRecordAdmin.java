@@ -46,31 +46,14 @@ public class StudentRecordAdmin extends JInternalFrame {
 	private JTextField number;
 	private JTable table;
 	int ids=0;
-	/**
-	 * Launch the application.
-	 */
+
 	studentService ss = new studentserviceImpl();
 	List<studentinfo> ninfo = ss.getstudentDetailbyID();
 
 	private JTextField gender;
 	private JTextField dob;
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					StudentRecordAdmin frame = new StudentRecordAdmin();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 * @throws PropertyVetoException 
-	 */
+
 	public StudentRecordAdmin() throws PropertyVetoException {
 //		setTitle("Student record");
 		setBorder(null);
@@ -119,13 +102,14 @@ public class StudentRecordAdmin extends JInternalFrame {
 				"Id", "Name", "Subject", "Semester", "Section"
 			}
 		));
+		
 		table.getColumnModel().getColumn(1).setPreferredWidth(124);
 		table.getColumnModel().getColumn(2).setPreferredWidth(97);
 		table.getColumnModel().getColumn(3).setPreferredWidth(101);
 		table.getColumnModel().getColumn(4).setPreferredWidth(114);
 	
 		table.setBorder(new LineBorder(Color.BLACK));
-		displatTable(table);
+		
 		JLabel label_13 = new JLabel("");
 		label_13.setFont(new Font("Dialog", Font.BOLD, 14));
 		label_13.setBounds(410, 115, 64, 15);
@@ -157,9 +141,27 @@ public class StudentRecordAdmin extends JInternalFrame {
 			}
 			
 		});
-		displatTable(table);
+		
 		btnDeleteStudent.setBounds(322, 275, 152, 25);
 		panel.add(btnDeleteStudent);
+		
+		JButton btnView = new JButton("Refresh");
+		btnView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				displatTable(table);
+			}
+		});
+		btnView.setBounds(213, 276, 99, 25);
+		panel.add(btnView);
+		
+		JButton btnView_1 = new JButton("View");
+		btnView_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				displatTable(table);
+			}
+		});
+		btnView_1.setBounds(104, 276, 99, 25);
+		panel.add(btnView_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
