@@ -286,7 +286,7 @@ public class homepageEvent extends JInternalFrame {
 			}
 		});
 		if(trigervalue==1) {
-			btnDelete.setVisible(false);
+			btnAddEvent.setVisible(false);
 		}
 		btnAddEvent.setBounds(206, 506, 109, 25);
 		panel_2.add(btnAddEvent);
@@ -298,7 +298,7 @@ public class homepageEvent extends JInternalFrame {
 			}
 		});
 		if(trigervalue==1) {
-			btnDelete.setVisible(false);
+			btnBook.setVisible(false);
 		}
 		btnBook.setBounds(433, 506, 109, 25);
 		panel_2.add(btnBook);

@@ -163,6 +163,9 @@ public class NoticedashBoard extends JInternalFrame {
 			
 			}
 		});
+		if(triggerValue==1) {
+			delete.setVisible(false);
+		}
 		delete.setBounds(99, 253, 97, 25);
 		panel.add(delete);
 		
