@@ -272,6 +272,9 @@ public class homepageEvent extends JInternalFrame {
 		if(trigervalue==1) {
 			btnDelete.setVisible(false);
 		}
+		if(trigervalue==2) {
+			btnDelete.setVisible(false);
+		}
 		btnDelete.setBounds(103, 507, 91, 25);
 		panel_2.add(btnDelete);
 		
@@ -288,6 +291,9 @@ public class homepageEvent extends JInternalFrame {
 		if(trigervalue==1) {
 			btnAddEvent.setVisible(false);
 		}
+		if(trigervalue==2) {
+			btnAddEvent.setVisible(false);
+		}
 		btnAddEvent.setBounds(206, 506, 109, 25);
 		panel_2.add(btnAddEvent);
 		
@@ -297,7 +303,13 @@ public class homepageEvent extends JInternalFrame {
 				JOptionPane.showMessageDialog(null, "Event has been book. FOr detail Visit clz NoticeBoard");
 			}
 		});
+		if(trigervalue==0) {
+			btnBook.setVisible(false);
+		}
 		if(trigervalue==1) {
+			btnBook.setVisible(true);
+		}
+		if(trigervalue==2) {
 			btnBook.setVisible(false);
 		}
 		btnBook.setBounds(433, 506, 109, 25);

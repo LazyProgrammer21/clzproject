@@ -95,7 +95,7 @@ public class GuestUser extends JFrame {
 		btnEventDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				desktopPane.removeAll();
-				homepageEvent gh = new homepageEvent(1);
+				homepageEvent gh = new homepageEvent(2);
 				gh.setVisible(true);
 				desktopPane.add(gh);
 			}
